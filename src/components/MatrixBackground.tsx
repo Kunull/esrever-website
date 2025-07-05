@@ -2,24 +2,38 @@
 
 import { useEffect, useRef } from 'react';
 
-const MatrixBackground = ({ className = '' }: { className?: string }) => {
+interface Props {
+  className?: string;
+}
+
+const MatrixBackground: React.FC<Props> = ({ className = '' }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    const container = containerRef.current;
+    if (!canvas || !container) return;
 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const cellSize = 20; // Size of each grid cell
-    const fontSize = 11; // Actual font size
+    const cellSize = 16; // Size of each grid cell (reduced for better density)
+    const fontSize = 10; // Actual font size (slightly smaller for better fit)
     const chars = '0123456789ABCDEF'; // Hex characters only
-    const pairSpacing = 6; // Space between characters in a pair
-    const density = 1; // Higher number = more dense characters
-    const columns = Math.floor((window.innerWidth * density) / cellSize);
-    const rows = Math.floor((window.innerHeight * density) / cellSize);
-    const grid: { chars: [string, string]; nextUpdate: number }[][] = Array(rows).fill(0).map(() =>
+    const pairSpacing = 4; // Space between characters in a pair (reduced for better fit)
+    const density = 1.2; // Higher number = more dense characters
+
+    // Set initial canvas size
+    const { width, height } = container.getBoundingClientRect();
+    canvas.width = width;
+    canvas.height = height;
+    
+    ctx.font = `${fontSize}px ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace`;
+    ctx.textBaseline = 'top';
+    let columns = Math.floor((width * density) / cellSize);
+    let rows = Math.floor((height * density) / cellSize);
+    let grid: { chars: [string, string]; nextUpdate: number }[][] = Array(rows).fill(0).map(() =>
       Array(columns).fill(0).map(() => ({
         chars: [
           chars[Math.floor(Math.random() * chars.length)],
@@ -30,14 +44,41 @@ const MatrixBackground = ({ className = '' }: { className?: string }) => {
     );
 
     const resizeCanvas = () => {
-      // Get the actual height of the hero section
-      const heroSection = document.querySelector('section');
-      const heroHeight = heroSection?.getBoundingClientRect().height || window.innerHeight;
-      
-      canvas.width = window.innerWidth;
-      canvas.height = heroHeight;
-      ctx.font = `${fontSize}px ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace`;
-      ctx.textBaseline = 'top';
+      if (canvasRef.current && containerRef.current) {
+        const container = containerRef.current;
+        const rect = container.getBoundingClientRect();
+        const scale = window.devicePixelRatio || 1;
+        
+        // Get the actual computed height to handle vh units correctly
+        const computedStyle = window.getComputedStyle(container);
+        const height = parseFloat(computedStyle.height);
+        const width = rect.width;
+        
+        canvasRef.current.width = width * scale;
+        canvasRef.current.height = height * scale;
+        canvasRef.current.style.width = `${width}px`;
+        canvasRef.current.style.height = `${height}px`;
+
+        const ctx = canvasRef.current.getContext('2d');
+        if (ctx) {
+          ctx.scale(scale, scale);
+          ctx.font = `${fontSize}px ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace`;
+          ctx.textBaseline = 'top';
+        }
+
+        // Update grid dimensions
+        columns = Math.floor((width * density) / cellSize);
+        rows = Math.floor((height * density) / cellSize);
+        grid = Array(rows).fill(0).map(() =>
+          Array(columns).fill(0).map(() => ({
+            chars: [
+              chars[Math.floor(Math.random() * chars.length)],
+              chars[Math.floor(Math.random() * chars.length)]
+            ],
+            nextUpdate: Math.random() * 100
+          }))
+        );
+      }
     };
 
     const draw = (timestamp: number) => {
@@ -60,14 +101,14 @@ const MatrixBackground = ({ className = '' }: { className?: string }) => {
           
           // Calculate opacity based on vertical position
           const midPoint = rows / 2;
-          let opacity = 0.2; // Base opacity reduced
+          let opacity = 0.15; // Base opacity for better visibility
           
           if (y < midPoint) {
             // Fade in from 0 to full opacity in the first half
             opacity *= (y / midPoint);
           }
           
-          ctx.fillStyle = `rgba(220, 220, 220, ${opacity})`;
+          ctx.fillStyle = `rgba(200, 200, 200, ${opacity})`;
           // Draw character pair (hex-like)
           const baseX = x * cellSize;
           const yPos = y * cellSize + (cellSize - fontSize) / 2 + fontSize;
@@ -94,11 +135,13 @@ const MatrixBackground = ({ className = '' }: { className?: string }) => {
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      className={`w-full h-full pointer-events-none ${className}`}
-      style={{ mixBlendMode: 'screen', opacity: 0.6 }}
-    />
+    <div ref={containerRef} className={`${className} overflow-hidden`}>
+      <canvas
+        ref={canvasRef}
+        className={`w-full h-full pointer-events-none`}
+        style={{ mixBlendMode: 'screen', opacity: 1 }}
+      />
+    </div>
   );
 };
 
