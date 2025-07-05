@@ -1,6 +1,14 @@
+'use client';
+
 import MatrixBackground from '../components/MatrixBackground';
+import React from 'react';
 
 export default function Home() {
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
   return (
     <div className="min-h-screen bg-black relative overflow-hidden">
       {/* Glassmorphic Navbar */}
@@ -10,11 +18,44 @@ export default function Home() {
             <a href="#" className="text-white text-2xl font-bold">
               <span className="font-title">ESREV<span className="flip-h">E</span><span className="flip-h">R</span></span>
             </a>
-            <div className="hidden md:flex items-center space-x-8">
-              <a href="#features" className="text-gray-300 hover:text-white transition-colors">Features</a>
-              <a href="#demo" className="text-gray-300 hover:text-white transition-colors">Demo</a>
-              <a href="#docs" className="text-gray-300 hover:text-white transition-colors">Documentation</a>
-              <a href="#" className="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all">
+            <div className="md:hidden">
+              <button
+                onClick={toggleMenu}
+                className="text-white p-2 focus:outline-none"
+                aria-label="Toggle menu"
+              >
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  {isMenuOpen ? (
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  ) : (
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 6h16M4 12h16M4 18h16"
+                    />
+                  )}
+                </svg>
+              </button>
+            </div>
+            <div className={`md:flex items-center space-y-4 md:space-y-0 md:space-x-8 ${isMenuOpen ? 'block fixed md:relative top-[72px] md:top-0 left-0 right-0 bg-black/95 backdrop-blur-sm border-b border-white/10 p-4 space-y-4 z-40' : 'hidden'}`}>
+              <a href="#features" className="block text-gray-300 hover:text-white transition-colors">Features</a>
+              <a href="#demo" className="block text-gray-300 hover:text-white transition-colors">Demo</a>
+              <a href="#docs" className="block text-gray-300 hover:text-white transition-colors">Documentation</a>
+              <a
+                href="#"
+                className="block w-full md:w-auto px-4 py-2 rounded-lg bg-white text-black hover:bg-white/90 transition-all text-center font-medium"
+              >
                 Download
               </a>
             </div>
@@ -32,19 +73,19 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
               <a
                 href="#"
-                className="w-full sm:w-auto px-8 py-4 rounded-lg bg-white text-black font-medium hover:bg-white/90 transition-all flex items-center justify-center space-x-2"
+                className="w-full sm:w-auto px-8 py-4 rounded-lg bg-white text-black font-medium hover:bg-white/90 transition-all flex items-center justify-center space-x-2 group"
               >
                 <span>Download</span>
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                <svg className="w-5 h-5 transform group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                 </svg>
               </a>
               <a
                 href="#"
-                className="w-full sm:w-auto px-8 py-4 rounded-lg bg-white/20 text-white font-medium hover:bg-white/30 transition-colors flex items-center justify-center space-x-2"
+                className="w-full sm:w-auto px-8 py-4 rounded-lg bg-white/20 backdrop-blur-sm text-white font-medium hover:bg-white/30 transition-all flex items-center justify-center space-x-2 group border border-white/10"
               >
                 <span>View Documentation</span>
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 transform group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
               </a>
@@ -58,7 +99,7 @@ export default function Home() {
       <section id="features" className="py-24 relative border-t border-white/10">
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-5xl mx-auto">
-            <h2 className="text-4xl font-bold text-white mb-16 text-center">
+            <h2 className="text-4xl font-bold text-white mb-16 text-center font-title uppercase tracking-wider">
               Advanced Features for Modern Reverse Engineering
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -150,10 +191,10 @@ export default function Home() {
       </section>
 
       {/* Why ESREVƎЯ Section */}
-      <section className="py-24 relative bg-white/5">
+      <section className="py-24 relative bg-white/5 border-t border-white/10">
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-5xl mx-auto">
-            <h2 className="text-4xl font-bold text-white mb-4 text-center">Why Choose <span className="font-title">ESREV<span className="flip-h">E</span><span className="flip-h">R</span></span>?</h2>
+            <h2 className="text-4xl font-bold text-white mb-4 text-center font-title uppercase tracking-wider">Why Choose ESREV<span className="flip-h">E</span><span className="flip-h">R</span>?</h2>
             <p className="text-xl text-gray-400 mb-16 text-center max-w-3xl mx-auto">
               Compare our modern approach to traditional reverse engineering tools
             </p>
@@ -229,10 +270,10 @@ export default function Home() {
       </section>
 
       {/* Call to Action */}
-      <section className="py-24 relative bg-gradient-to-b from-white/5 to-transparent">
+      <section className="py-24 relative bg-gradient-to-b from-white/5 to-transparent border-t border-white/10">
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Start Your Journey Today</h2>
+            <h2 className="text-4xl font-bold text-white mb-6 font-title uppercase tracking-wider">Start Your Journey Today</h2>
             <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
               Join the next generation of security researchers using <span className="font-title">ESREV<span className="flip-h">E</span><span className="flip-h">R</span></span> for advanced reverse engineering.
             </p>
@@ -241,18 +282,18 @@ export default function Home() {
                 href="#"
                 className="px-8 py-4 rounded-lg bg-white text-black font-medium hover:bg-white/90 transition-all flex items-center justify-center space-x-2 group"
               >
-                <span>Download ESREVƎЯ</span>
-                <svg className="w-5 h-5 transform group-hover:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <span>Download</span>
+                <svg className="w-5 h-5 transform group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                 </svg>
               </a>
               <a
                 href="#"
-                className="px-8 py-4 rounded-lg bg-white/10 text-white font-medium hover:bg-white/20 transition-all flex items-center justify-center space-x-2 group"
+                className="px-8 py-4 rounded-lg bg-white/20 backdrop-blur-sm text-white font-medium hover:bg-white/30 transition-all flex items-center justify-center space-x-2 group border border-white/10"
               >
                 <span>View Documentation</span>
                 <svg className="w-5 h-5 transform group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
               </a>
             </div>
@@ -264,10 +305,10 @@ export default function Home() {
       <footer className="py-8 border-t border-white/10">
         <div className="container mx-auto px-4">
           <div className="text-center text-gray-400">
-            &copy; 2025 ESREVƎЯ. All rights reserved.
+            &copy; 2025 Kunull. All rights reserved.
           </div>
         </div>
       </footer>
     </div>
-  )
+  );
 }
