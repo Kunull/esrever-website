@@ -12,8 +12,8 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-black relative overflow-hidden">
       {/* Glassmorphic Navbar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm bg-black/40 border-b border-white/10">
-        <div className="container mx-auto px-4 py-4">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/40 backdrop-blur-xl backdrop-saturate-150 border-b border-white/10">
+        <div className="container mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
             <a href="#" className="text-white text-2xl font-bold">
               <span className="font-title">ESREV<span className="flip-h">E</span><span className="flip-h">R</span></span>
@@ -21,7 +21,7 @@ export default function Home() {
             <div className="md:hidden">
               <button
                 onClick={toggleMenu}
-                className="text-white p-2 focus:outline-none"
+                className="text-white p-2 focus:outline-none hover:bg-white/10 transition-colors"
                 aria-label="Toggle menu"
               >
                 <svg
@@ -48,12 +48,13 @@ export default function Home() {
                 </svg>
               </button>
             </div>
-            <div className={`md:flex items-center space-y-4 md:space-y-0 md:space-x-8 ${isMenuOpen ? 'block fixed md:relative top-[72px] md:top-0 left-0 right-0 bg-black/95 backdrop-blur-sm border-b border-white/10 p-4 space-y-4 z-40' : 'hidden'}`}>
-              <a href="#features" className="block text-gray-300 hover:text-white transition-colors">Features</a>
-              <a href="#demo" className="block text-gray-300 hover:text-white transition-colors">Demo</a>
-              <a href="#docs" className="block text-gray-300 hover:text-white transition-colors">Documentation</a>
+            <div className={`md:flex items-center space-y-4 md:space-y-0 md:space-x-8 ${isMenuOpen ? 'block fixed md:static inset-x-0 top-[49px] left-0 right-0 bg-black/40 backdrop-blur-xl shadow-lg border-b border-white/10 p-6 space-y-4 z-40 backdrop-saturate-150 bg-clip-padding backdrop-filter' : 'hidden'}`}>
+              <a href="#features" onClick={() => setIsMenuOpen(false)} className="block text-gray-300 hover:text-white transition-colors">Features</a>
+              <a href="#demo" onClick={() => setIsMenuOpen(false)} className="block text-gray-300 hover:text-white transition-colors">Demo</a>
+              <a href="#docs" onClick={() => setIsMenuOpen(false)} className="block text-gray-300 hover:text-white transition-colors">Documentation</a>
               <a
                 href="#"
+                onClick={() => setIsMenuOpen(false)}
                 className="block w-full md:w-auto px-4 py-2 rounded-lg bg-white text-black hover:bg-white/90 transition-all text-center font-medium"
               >
                 Download
