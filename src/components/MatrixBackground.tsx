@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 
-const HexDumpBackground = ({ className = '' }: { className?: string }) => {
+const MatrixBackground = ({ className = '' }: { className?: string }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -12,108 +12,81 @@ const HexDumpBackground = ({ className = '' }: { className?: string }) => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const fontSize = 11;
-    const lineHeight = fontSize * 1.6;
-    const bytesPerLine = 16;
-    const offsetWidth = 75;
-    const hexWidth = bytesPerLine * fontSize * 2.5;
-    const asciiWidth = bytesPerLine * fontSize * 0.7;
-    const columnPadding = 50;
-    const columnWidth = offsetWidth + hexWidth + asciiWidth + columnPadding;
-    const columnGap = 20;
+    const cellSize = 20; // Size of each grid cell
+    const fontSize = 11; // Actual font size
+    const chars = '0123456789ABCDEF'; // Hex characters only
+    const pairSpacing = 6; // Space between characters in a pair
+    const density = 1; // Higher number = more dense characters
+    const columns = Math.floor((window.innerWidth * density) / cellSize);
+    const rows = Math.floor((window.innerHeight * density) / cellSize);
+    const grid: { chars: [string, string]; nextUpdate: number }[][] = Array(rows).fill(0).map(() =>
+      Array(columns).fill(0).map(() => ({
+        chars: [
+          chars[Math.floor(Math.random() * chars.length)],
+          chars[Math.floor(Math.random() * chars.length)]
+        ],
+        nextUpdate: Math.random() * 100
+      }))
+    );
 
     const resizeCanvas = () => {
-      const dpr = window.devicePixelRatio || 1;
-      const rect = canvas.getBoundingClientRect();
-      canvas.width = rect.width * dpr;
-      canvas.height = rect.height * dpr;
-      ctx.scale(dpr, dpr);
-      canvas.style.width = `${rect.width}px`;
-      canvas.style.height = `${rect.height}px`;
-    };
-
-    const drawHexColumn = (startX: number, numRows: number) => {
-      const dpr = window.devicePixelRatio || 1;
-      const adjustedStartX = startX / dpr;
+      // Get the actual height of the hero section
+      const heroSection = document.querySelector('section');
+      const heroHeight = heroSection?.getBoundingClientRect().height || window.innerHeight;
       
-      for (let i = 0; i < numRows; i++) {
-        const y = (i + 1) * lineHeight;
-        const lineOffset = i * bytesPerLine;
-        
-        // Line number
-        const offsetHex = lineOffset.toString(16).padStart(8, '0');
-        ctx.fillStyle = '#888888';
-        ctx.fillText(offsetHex + ':', adjustedStartX + 10, y);
-
-        // Generate random bytes for this line
-        const bytes = Array(bytesPerLine).fill(0).map(() => Math.floor(Math.random() * 256));
-        let asciiPart = '';
-
-        // Draw hex values
-        for (let j = 0; j < bytesPerLine; j++) {
-          const byte = bytes[j];
-          const hexByte = byte.toString(16).padStart(2, '0');
-          
-          // Position for hex values
-          const xPos = adjustedStartX + offsetWidth + j * (fontSize * 2.2);
-          ctx.fillStyle = '#AAAAAA';
-          ctx.fillText(hexByte, xPos, y);
-          
-          // Add separator between groups of 4
-          if ((j + 1) % 4 === 0 && j < bytesPerLine - 1) {
-            ctx.fillStyle = '#666666';
-            ctx.fillText('│', xPos + fontSize * 1.8, y);
-          }
-
-          // Build ASCII part
-          asciiPart += byte >= 32 && byte <= 126 ? String.fromCharCode(byte) : '.';
-        }
-
-        // Separator before ASCII
-        const separatorX = adjustedStartX + offsetWidth + hexWidth + 10;
-        ctx.fillStyle = '#666666';
-        ctx.fillText('║', separatorX, y);
-
-        // ASCII representation
-        ctx.fillStyle = '#AAAAAA';
-        ctx.fillText(asciiPart, separatorX + 15, y);
-      }
+      canvas.width = window.innerWidth;
+      canvas.height = heroHeight;
+      ctx.font = `${fontSize}px ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace`;
+      ctx.textBaseline = 'top';
     };
 
-    const drawHexDump = () => {
-      ctx.fillStyle = '#000';
+    const draw = (timestamp: number) => {
+      // Clear the canvas completely
+      ctx.fillStyle = 'rgb(0, 0, 0)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.font = `${fontSize}px 'Fira Code', monospace`;
 
-      // Calculate number of columns and rows needed to fill the screen
-      const dpr = window.devicePixelRatio || 1;
-      const screenWidth = canvas.width / dpr;
-      const screenHeight = canvas.height / dpr;
-      
-      // Calculate number of columns with fixed gap
-      const numColumns = Math.floor((screenWidth + columnGap) / (columnWidth + columnGap));
-      const totalWidth = numColumns * columnWidth + (numColumns - 1) * columnGap;
-      const startX = (screenWidth - totalWidth) / 2;
-      
-      // Calculate number of rows needed
-      const numRows = Math.ceil(screenHeight / lineHeight);
-      
-      // Draw columns
-      for (let col = 0; col < numColumns; col++) {
-        drawHexColumn(startX + col * (columnWidth + columnGap), numRows);
+      for (let y = 0; y < rows; y++) {
+        for (let x = 0; x < columns; x++) {
+          const cell = grid[y][x];
+          
+          if (timestamp >= cell.nextUpdate) {
+            // Update both characters together
+            cell.chars = [
+              chars[Math.floor(Math.random() * chars.length)],
+              chars[Math.floor(Math.random() * chars.length)]
+            ];
+            cell.nextUpdate = timestamp + Math.random() * 3000 + 500;
+          }
+          
+          // Calculate opacity based on vertical position
+          const midPoint = rows / 2;
+          let opacity = 0.2; // Base opacity reduced
+          
+          if (y < midPoint) {
+            // Fade in from 0 to full opacity in the first half
+            opacity *= (y / midPoint);
+          }
+          
+          ctx.fillStyle = `rgba(220, 220, 220, ${opacity})`;
+          // Draw character pair (hex-like)
+          const baseX = x * cellSize;
+          const yPos = y * cellSize + (cellSize - fontSize) / 2 + fontSize;
+          
+          const [char1, char2] = cell.chars;
+          const xPos1 = baseX + (cellSize - pairSpacing - ctx.measureText(char1 + char2).width) / 2;
+          const xPos2 = xPos1 + ctx.measureText(char1).width + pairSpacing;
+          
+          ctx.fillText(char1, xPos1, yPos);
+          ctx.fillText(char2, xPos2, yPos);
+        }
       }
-    };
 
-    const render = () => {
-      drawHexDump();
+      requestAnimationFrame(draw);
     };
 
     resizeCanvas();
-    window.addEventListener('resize', () => {
-      resizeCanvas();
-      drawHexDump();
-    });
-    drawHexDump();
+    window.addEventListener('resize', resizeCanvas);
+    requestAnimationFrame(draw);
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
@@ -123,10 +96,10 @@ const HexDumpBackground = ({ className = '' }: { className?: string }) => {
   return (
     <canvas
       ref={canvasRef}
-      className={className}
-      style={{ filter: 'blur(0.5px)' }}
+      className={`w-full h-full pointer-events-none ${className}`}
+      style={{ mixBlendMode: 'screen', opacity: 0.6 }}
     />
   );
 };
 
-export default HexDumpBackground;
+export default MatrixBackground;

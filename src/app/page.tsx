@@ -1,9 +1,10 @@
+import MatrixBackground from '../components/MatrixBackground';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-black relative overflow-hidden">
       {/* Glassmorphic Navbar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/80 border-b border-white/10">
+      <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm bg-black/40 border-b border-white/10">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <a href="#" className="text-white text-2xl font-bold">
@@ -22,26 +23,25 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="min-h-screen relative overflow-hidden bg-black pt-24 pb-20 flex flex-col justify-center">
+      <section className="min-h-[80vh] relative pt-24 pb-16 flex flex-col justify-center bg-transparent overflow-hidden">
+        <MatrixBackground className="absolute inset-0" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-5xl mx-auto text-center">
-            <h1 className="text-6xl md:text-8xl font-bold mb-12"><span className="font-title">ESREV<span className="flip-h">E</span><span className="flip-h">R</span></span></h1>
-            <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
-              Next-generation binary analysis platform for security researchers.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 items-center justify-center mb-12">
+            <h1 className="text-6xl md:text-8xl font-bold mb-8"><span className="font-title">ESREV<span className="flip-h">E</span><span className="flip-h">R</span></span></h1>
+            <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">Next-generation binary analysis and reverse engineering tool for security researchers.</p>
+            <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
               <a
                 href="#"
                 className="w-full sm:w-auto px-8 py-4 rounded-lg bg-white text-black font-medium hover:bg-white/90 transition-all flex items-center justify-center space-x-2"
               >
-                <span>Try Online Demo</span>
+                <span>Download</span>
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                 </svg>
               </a>
               <a
                 href="#"
-                className="w-full sm:w-auto px-8 py-4 rounded-lg bg-white/10 text-white font-medium hover:bg-white/20 transition-colors flex items-center justify-center space-x-2"
+                className="w-full sm:w-auto px-8 py-4 rounded-lg bg-white/20 text-white font-medium hover:bg-white/30 transition-colors flex items-center justify-center space-x-2"
               >
                 <span>View Documentation</span>
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -49,20 +49,7 @@ export default function Home() {
                 </svg>
               </a>
             </div>
-            <div className="grid grid-cols-3 gap-8 max-w-3xl mx-auto text-center text-sm text-gray-400">
-              <div>
-                <div className="font-medium text-white mb-1">Multi-Architecture</div>
-                x86, ARM, MIPS & more
-              </div>
-              <div>
-                <div className="font-medium text-white mb-1">Real-Time Analysis</div>
-                Live debugging & monitoring
-              </div>
-              <div>
-                <div className="font-medium text-white mb-1">Pattern Recognition</div>
-                AI-powered code analysis
-              </div>
-            </div>
+
           </div>
         </div>
       </section>
