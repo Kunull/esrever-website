@@ -1,0 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'VCR OSD Mono';
+  src: url('/VCROSDMono.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+
+:root {
+  --border: 255, 255, 255;
+  --background: 0, 0, 0;
+  --foreground: 255, 255, 255;
+  --font-title: 'VCR OSD Mono', monospace;
+  --font-text: 'JetBrains Mono', monospace;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-text), monospace;
+    scroll-behavior: smooth;
+  }
+
+  h1, h2, h3, h4, h5, h6, p, a, span, div {
+    font-family: var(--font-text), monospace;
+  }
+}
+
+.font-title, .font-title * {
+  font-family: 'VCR OSD Mono', monospace !important;
+  letter-spacing: normal;
+  text-transform: uppercase;
+}
+
+
+
+.flip-h {
+  display: inline-block;
+  transform: scaleX(-1);
+  font-family: inherit;
+}
+
+.rotate-180 {
+  display: inline-block;
+  transform: rotate(180deg);
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+body {
+  color: rgb(var(--foreground));
+  background: rgb(var(--background));
+  font-family: var(--font-geist-sans);
+}
+
+/* Glassmorphism utilities */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Gradient animations */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient 15s ease infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Transitions */
+* {
+  transition-property: background-color, border-color, opacity, transform;
+  transition-duration: 0.15s;
+  transition-timing-function: ease;
+}
+
+/* Selection */
+::selection {
+  background: rgba(255, 255, 255, 0.99);
+  color: #000;
+}
+
+/* Focus outline */
+*:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground: 255, 255, 255;
+    --background: 0, 0, 0;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}

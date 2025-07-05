@@ -1,0 +1,286 @@
+
+export default function Home() {
+  return (
+    <div className="min-h-screen bg-black">
+      {/* Glassmorphic Navbar */}
+      <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/80 border-b border-white/10">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <a href="#" className="text-white text-2xl font-bold">
+              <span className="font-title">ESREV<span className="flip-h">E</span><span className="flip-h">R</span></span>
+            </a>
+            <div className="hidden md:flex items-center space-x-8">
+              <a href="#features" className="text-gray-300 hover:text-white transition-colors">Features</a>
+              <a href="#demo" className="text-gray-300 hover:text-white transition-colors">Demo</a>
+              <a href="#docs" className="text-gray-300 hover:text-white transition-colors">Documentation</a>
+              <a href="#" className="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all">
+                Download
+              </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="min-h-screen relative overflow-hidden bg-black pt-24 pb-20 flex flex-col justify-center">
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-5xl mx-auto text-center">
+            <h1 className="text-6xl md:text-8xl font-bold mb-12"><span className="font-title">ESREV<span className="flip-h">E</span><span className="flip-h">R</span></span></h1>
+            <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
+              Next-generation binary analysis platform for security researchers.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 items-center justify-center mb-12">
+              <a
+                href="#"
+                className="w-full sm:w-auto px-8 py-4 rounded-lg bg-white text-black font-medium hover:bg-white/90 transition-all flex items-center justify-center space-x-2"
+              >
+                <span>Try Online Demo</span>
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
+              <a
+                href="#"
+                className="w-full sm:w-auto px-8 py-4 rounded-lg bg-white/10 text-white font-medium hover:bg-white/20 transition-colors flex items-center justify-center space-x-2"
+              >
+                <span>View Documentation</span>
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+              </a>
+            </div>
+            <div className="grid grid-cols-3 gap-8 max-w-3xl mx-auto text-center text-sm text-gray-400">
+              <div>
+                <div className="font-medium text-white mb-1">Multi-Architecture</div>
+                x86, ARM, MIPS & more
+              </div>
+              <div>
+                <div className="font-medium text-white mb-1">Real-Time Analysis</div>
+                Live debugging & monitoring
+              </div>
+              <div>
+                <div className="font-medium text-white mb-1">Pattern Recognition</div>
+                AI-powered code analysis
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section id="features" className="py-24 relative border-t border-white/10">
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-5xl mx-auto">
+            <h2 className="text-4xl font-bold text-white mb-16 text-center">
+              Advanced Features for Modern Reverse Engineering
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+              <div className="space-y-12">
+                <div className="relative">
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 p-3 mr-4 bg-white/5 rounded-lg">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-white mb-2">Multi-Architecture Analysis</h3>
+                      <p className="text-gray-400 leading-relaxed">Comprehensive support for x86, ARM, MIPS, and RISC-V architectures. Advanced disassembly with intelligent code flow analysis and cross-reference tracking.</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="relative">
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 p-3 mr-4 bg-white/5 rounded-lg">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-white mb-2">Real-Time Dynamic Analysis</h3>
+                      <p className="text-gray-400 leading-relaxed">Live debugging with memory visualization, state tracking, and execution flow monitoring. Set breakpoints, inspect registers, and analyze memory in real-time.</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="relative">
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 p-3 mr-4 bg-white/5 rounded-lg">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-white mb-2">AI-Powered Pattern Recognition</h3>
+                      <p className="text-gray-400 leading-relaxed">Machine learning algorithms identify common code patterns, potential vulnerabilities, and malicious behaviors. Automated analysis of large codebases with intelligent insights.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="space-y-12">
+                <div className="relative">
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 p-3 mr-4 bg-white/5 rounded-lg">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-white mb-2">Advanced Scripting & Automation</h3>
+                      <p className="text-gray-400 leading-relaxed">Powerful Python API for custom analysis scripts. Automate repetitive tasks, create custom analysis plugins, and integrate with existing security tools.</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="relative">
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 p-3 mr-4 bg-white/5 rounded-lg">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-white mb-2">Collaborative Analysis</h3>
+                      <p className="text-gray-400 leading-relaxed">Share analysis sessions, annotations, and findings with team members in real-time. Built-in version control and project management features.</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="relative">
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 p-3 mr-4 bg-white/5 rounded-lg">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-white mb-2">Security-First Design</h3>
+                      <p className="text-gray-400 leading-relaxed">Built with security in mind. Sandboxed analysis environment, encrypted storage, and secure sharing capabilities protect your sensitive research.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why ESREVƎЯ Section */}
+      <section className="py-24 relative bg-white/5">
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-5xl mx-auto">
+            <h2 className="text-4xl font-bold text-white mb-4 text-center">Why Choose <span className="font-title">ESREV<span className="flip-h">E</span><span className="flip-h">R</span></span>?</h2>
+            <p className="text-xl text-gray-400 mb-16 text-center max-w-3xl mx-auto">
+              Compare our modern approach to traditional reverse engineering tools
+            </p>
+            
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="border-b border-white/10">
+                    <th className="py-4 px-6 text-left text-sm font-medium text-gray-400">Features</th>
+                    <th className="py-4 px-6 text-center text-sm font-medium text-white">ESREVƎЯ</th>
+                    <th className="py-4 px-6 text-center text-sm font-medium text-gray-400">Traditional Tools</th>
+                  </tr>
+                </thead>
+                <tbody className="text-sm">
+                  <tr className="border-b border-white/10">
+                    <td className="py-4 px-6 text-gray-300">Multi-Architecture Support</td>
+                    <td className="py-4 px-6 text-center text-white">
+                      <svg className="w-5 h-5 mx-auto text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </td>
+                    <td className="py-4 px-6 text-center text-gray-400">Limited</td>
+                  </tr>
+                  <tr className="border-b border-white/10">
+                    <td className="py-4 px-6 text-gray-300">Real-Time Analysis</td>
+                    <td className="py-4 px-6 text-center text-white">
+                      <svg className="w-5 h-5 mx-auto text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </td>
+                    <td className="py-4 px-6 text-center text-gray-400">Basic</td>
+                  </tr>
+                  <tr className="border-b border-white/10">
+                    <td className="py-4 px-6 text-gray-300">AI-Powered Analysis</td>
+                    <td className="py-4 px-6 text-center text-white">
+                      <svg className="w-5 h-5 mx-auto text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </td>
+                    <td className="py-4 px-6 text-center text-gray-400">
+                      <svg className="w-5 h-5 mx-auto text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </td>
+                  </tr>
+                  <tr className="border-b border-white/10">
+                    <td className="py-4 px-6 text-gray-300">Collaborative Features</td>
+                    <td className="py-4 px-6 text-center text-white">
+                      <svg className="w-5 h-5 mx-auto text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </td>
+                    <td className="py-4 px-6 text-center text-gray-400">
+                      <svg className="w-5 h-5 mx-auto text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="py-4 px-6 text-gray-300">Modern UI/UX</td>
+                    <td className="py-4 px-6 text-center text-white">
+                      <svg className="w-5 h-5 mx-auto text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </td>
+                    <td className="py-4 px-6 text-center text-gray-400">Basic</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Call to Action */}
+      <section className="py-24 relative bg-gradient-to-b from-white/5 to-transparent">
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Start Your Journey Today</h2>
+            <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
+              Join the next generation of security researchers using <span className="font-title">ESREV<span className="flip-h">E</span><span className="flip-h">R</span></span> for advanced reverse engineering.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <a
+                href="#"
+                className="px-8 py-4 rounded-lg bg-white text-black font-medium hover:bg-white/90 transition-all flex items-center justify-center space-x-2 group"
+              >
+                <span>Download ESREVƎЯ</span>
+                <svg className="w-5 h-5 transform group-hover:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+              </a>
+              <a
+                href="#"
+                className="px-8 py-4 rounded-lg bg-white/10 text-white font-medium hover:bg-white/20 transition-all flex items-center justify-center space-x-2 group"
+              >
+                <span>View Documentation</span>
+                <svg className="w-5 h-5 transform group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-8 border-t border-white/10">
+        <div className="container mx-auto px-4">
+          <div className="text-center text-gray-400">
+            &copy; 2025 ESREVƎЯ. All rights reserved.
+          </div>
+        </div>
+      </footer>
+    </div>
+  )
+}
