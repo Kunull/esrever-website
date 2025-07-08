@@ -96,7 +96,7 @@ const MatrixBackground: React.FC<Props> = ({ className = '' }) => {
               chars[Math.floor(Math.random() * chars.length)],
               chars[Math.floor(Math.random() * chars.length)]
             ];
-            cell.nextUpdate = timestamp + Math.random() * 3000 + 500;
+            cell.nextUpdate = timestamp + Math.random() * 6000 + 2000;
           }
           
           // Calculate opacity based on vertical position
