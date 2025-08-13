@@ -5,7 +5,7 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'ESREVER - Binary Analysis Tool',
+  title: 'REVER - Binary Analysis Tool',
   description: 'Advanced binary analysis and reverse engineering tool',
   icons: {
     icon: '/favicon.png'
