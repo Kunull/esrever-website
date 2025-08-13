@@ -16,7 +16,7 @@ export default function Home() {
         <div className="container mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
             <a href="#" className="text-white text-2xl font-bold">
-              <span className="font-title">ESREV<span className="flip-h">E</span><span className="flip-h">R</span></span>
+              <span className="font-title">REV<span className="flip-h">E</span><span className="flip-h">R</span></span>
             </a>
             <div className="md:hidden">
               <button
@@ -69,7 +69,7 @@ export default function Home() {
         <MatrixBackground className="absolute inset-0 w-full h-full" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center py-16">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6"><span className="font-title">ESREV<span className="flip-h">E</span><span className="flip-h">R</span></span></h1>
+            <h1 className="text-5xl md:text-7xl font-bold mb-6"><span className="font-title">REV<span className="flip-h">E</span><span className="flip-h">R</span></span></h1>
             <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
               Next-generation binary analysis and reverse engineering platform.
             </p>
@@ -193,11 +193,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why ESREVƎЯ Section */}
+      {/* Why REVƎЯ Section */}
       <section className="py-24 relative bg-white/5 border-t border-white/10">
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-5xl mx-auto">
-            <h2 className="text-4xl font-bold text-white mb-4 text-center font-title uppercase tracking-wider">Why Choose ESREV<span className="flip-h">E</span><span className="flip-h">R</span>?</h2>
+            <h2 className="text-4xl font-bold text-white mb-4 text-center font-title uppercase tracking-wider">Why Choose REV<span className="flip-h">E</span><span className="flip-h">R</span>?</h2>
             <p className="text-xl text-gray-400 mb-16 text-center max-w-3xl mx-auto">
               Compare our modern approach to traditional reverse engineering tools
             </p>
@@ -207,7 +207,7 @@ export default function Home() {
                 <thead>
                   <tr className="border-b border-white/10">
                     <th className="py-4 px-6 text-left text-sm font-medium text-gray-400">Features</th>
-                    <th className="py-4 px-6 text-center text-sm font-medium text-white">ESREVƎЯ</th>
+                    <th className="py-4 px-6 text-center text-sm font-medium text-white">REVƎЯ</th>
                     <th className="py-4 px-6 text-center text-sm font-medium text-gray-400">Traditional Tools</th>
                   </tr>
                 </thead>
@@ -278,7 +278,7 @@ export default function Home() {
           <div className="max-w-4xl mx-auto text-center py-16">
             <h2 className="text-4xl font-bold text-white mb-6 font-title uppercase tracking-wider">Start Your Journey Today</h2>
             <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
-              Join the next generation of security researchers using <span className="font-title">ESREV<span className="flip-h">E</span><span className="flip-h">R</span></span> for advanced reverse engineering.
+              Join the next generation of security researchers using <span className="font-title">REV<span className="flip-h">E</span><span className="flip-h">R</span></span> for advanced reverse engineering.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <a
