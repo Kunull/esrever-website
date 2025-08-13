@@ -33,13 +33,14 @@ const MatrixBackground: React.FC<Props> = ({ className = '' }) => {
     ctx.textBaseline = 'top';
     let columns = Math.floor((width * density) / cellSize);
     let rows = Math.floor((height * density) / cellSize);
-    let grid: { chars: [string, string]; nextUpdate: number }[][] = Array(rows).fill(0).map(() =>
+    let grid: { chars: [string, string]; nextUpdate: number; transitionStart: number }[][] = Array(rows).fill(0).map(() =>
       Array(columns).fill(0).map(() => ({
         chars: [
           chars[Math.floor(Math.random() * chars.length)],
           chars[Math.floor(Math.random() * chars.length)]
         ],
-        nextUpdate: Math.random() * 100
+        nextUpdate: Math.random() * 100,
+        transitionStart: 0
       }))
     );
 
@@ -75,7 +76,8 @@ const MatrixBackground: React.FC<Props> = ({ className = '' }) => {
               chars[Math.floor(Math.random() * chars.length)],
               chars[Math.floor(Math.random() * chars.length)]
             ],
-            nextUpdate: Math.random() * 100
+            nextUpdate: Math.random() * 100,
+            transitionStart: 0
           }))
         );
       }
@@ -97,18 +99,38 @@ const MatrixBackground: React.FC<Props> = ({ className = '' }) => {
               chars[Math.floor(Math.random() * chars.length)]
             ];
             cell.nextUpdate = timestamp + Math.random() * 5000 + 2000;
+            cell.transitionStart = timestamp; // Start transition effect
           }
           
           // Calculate opacity based on vertical position
           const midPoint = rows / 2;
-          let opacity = 0.15; // Base opacity for better visibility
+          let baseOpacity = 0.15; // Base opacity for better visibility
           
           if (y < midPoint) {
             // Fade in from 0 to full opacity in the first half
-            opacity *= (y / midPoint);
+            baseOpacity *= (y / midPoint);
           }
           
-          ctx.fillStyle = `rgba(200, 200, 200, ${opacity})`;
+          // Calculate transition effect
+          const transitionDuration = 600; // 600ms total transition
+          const timeSinceTransition = timestamp - cell.transitionStart;
+          let brightness = 200; // Base grey color
+          let opacity = baseOpacity;
+          
+          if (timeSinceTransition < transitionDuration && cell.transitionStart > 0) {
+            const progress = timeSinceTransition / transitionDuration;
+            
+            // Create a smooth bell curve: start normal -> brighten -> fade back to normal
+            // Use a sine wave for smooth transition
+            const transitionIntensity = Math.sin(progress * Math.PI);
+            
+            // Transition from normal grey (200) to brighter grey (240) and back
+            brightness = 200 + (10 * transitionIntensity);
+            // Also boost opacity during transition for more visibility
+            opacity = baseOpacity * (1 + (0.5 * transitionIntensity));
+          }
+          
+          ctx.fillStyle = `rgba(${brightness}, ${brightness}, ${brightness}, ${opacity})`;
           // Draw character pair (hex-like)
           const baseX = x * cellSize;
           const yPos = y * cellSize + (cellSize - fontSize) / 2 + fontSize;
