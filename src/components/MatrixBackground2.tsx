@@ -112,7 +112,7 @@ const MatrixBackground: React.FC<Props> = ({ className = '' }) => {
           }
           
           // Calculate transition effect
-          const transitionDuration = 600; // 600ms total transition
+          const transitionDuration = 1000; // 600ms total transition
           const timeSinceTransition = timestamp - cell.transitionStart;
           let brightness = 200; // Base grey color
           let opacity = baseOpacity;
