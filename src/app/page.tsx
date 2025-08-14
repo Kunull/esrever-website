@@ -1,6 +1,6 @@
 'use client';
 
-import MatrixBackground from '../components/MatrixBackground';
+import MatrixBackground from '../components/MatrixBackground2';
 import React from 'react';
 
 export default function Home() {
